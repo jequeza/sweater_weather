@@ -1,0 +1,44 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.openweathermap.org/data/2.5/onecall?appid=<WEATHER_KEY>&exclude=minutely,hourly,daily&lat=30.264979&lon=-97.746598&units=imperial
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v1.4.1
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - openresty
+      Date:
+      - Mon, 26 Apr 2021 15:33:21 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '409'
+      Connection:
+      - keep-alive
+      X-Cache-Key:
+      - "/data/2.5/onecall?exclude=minutely%2Chourly%2Cdaily&lat=30.26&lon=-97.75&units=imperial"
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Methods:
+      - GET, POST
+    body:
+      encoding: UTF-8
+      string: '{"lat":30.265,"lon":-97.7466,"timezone":"America/Chicago","timezone_offset":-18000,"current":{"dt":1619451201,"sunrise":1619437916,"sunset":1619485513,"temp":71.2,"feels_like":71.22,"pressure":1014,"humidity":68,"dew_point":60.12,"uvi":5.67,"clouds":100,"visibility":10000,"wind_speed":9.22,"wind_deg":150,"wind_gust":19.57,"weather":[{"id":804,"main":"Clouds","description":"overcast
+        clouds","icon":"04d"}]}}'
+  recorded_at: Mon, 26 Apr 2021 15:33:21 GMT
+recorded_with: VCR 6.0.0
