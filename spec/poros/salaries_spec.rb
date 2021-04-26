@@ -17,7 +17,7 @@ RSpec.describe Salaries do
                      :wind_speed=>11.5,
                      :wind_deg=>150,
                      :wind_gust=>21.85,
-                     :weather=>[{:id=>804, :main=>"Clouds", :description=>"overcast clouds", :icon=>"04d"}]}}
+                     :weather=>[{:id=>804, :main=>"Clouds", :description=>"overcast clouds", :icon=>"04d"}]}
 
 
     salaries_data = [{:job=>{:id=>"ACCOUNT-MANAGER", :title=>"Account Manager"},
@@ -133,5 +133,12 @@ RSpec.describe Salaries do
     location = 'austin'
 
     salaries = Salaries.new(weather_data, salaries_data, location)
+    expect(salaries).to be_a Salaries
+    expect(salaries.destination).to eq(location)
+    expect(salaries.forecast).to be_a SalariesCurrentWeather
+    expect(salaries.id).to be_nil
+    expect(salaries.salaries).to be_an Array
+    expect(salaries.salaries.length).to eq(7)
+    expect(salaries.salaries.first).to be_a TechSalaries
   end
 end
