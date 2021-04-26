@@ -3,8 +3,8 @@ class SalariesCurrentWeather
               :temperature
 
   def initialize(data)
-    @summary = data[:weather][0][:description]
-    @temperature = format_temp(data[:temp])
+    @summary = data[:current][:weather][0][:description]
+    @temperature = format_temp(data[:current][:temp])
   end
 
   def format_temp(temperature)

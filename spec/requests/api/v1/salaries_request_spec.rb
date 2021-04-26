@@ -9,6 +9,7 @@ RSpec.describe 'Salaries Api' do
       expect(response).to be_successful
 
       salaries = JSON.parse(response.body, symbolize_names: true)
+
       expect(salaries[:data][:type]).to eq('salaries')
       expect(salaries[:data][:attributes]).to have_key(:destination)
       expect(salaries[:data][:attributes]).to have_key(:forecast)
@@ -20,9 +21,9 @@ RSpec.describe 'Salaries Api' do
       expect(salaries[:data][:attributes][:forecast][:summary]).to be_a String
       expect(salaries[:data][:attributes][:forecast][:temperature]).to be_a String
       expect(salaries[:data][:attributes][:salaries]).to be_an Array
-      expect(salaries[:data][:attributes][:salaries]).to have_key(:title)
-      expect(salaries[:data][:attributes][:salaries]).to have_key(:min)
-      expect(salaries[:data][:attributes][:salaries]).to have_key(:max)
+      expect(salaries[:data][:attributes][:salaries].first).to have_key(:title)
+      expect(salaries[:data][:attributes][:salaries].first).to have_key(:min)
+      expect(salaries[:data][:attributes][:salaries].first).to have_key(:max)
       expect(salaries[:data][:attributes][:salaries].first[:title]).to be_an String
       expect(salaries[:data][:attributes][:salaries].first[:min]).to be_an String
       expect(salaries[:data][:attributes][:salaries].first[:max]).to be_an String
