@@ -6,6 +6,8 @@ RSpec.describe 'Salaries Api' do
       get '/api/v1/salaries?destination=austin'
 
       expect(response).to be_successful
+
+      # salaries = JSON.parse(response.body, symbolize_names: true)
     end
   end
 end
