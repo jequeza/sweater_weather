@@ -1,7 +1,7 @@
 class BackgroundImageService
-  def self.get_image(image_description)
+  def self.get_image(image_location)
     response = connection.get do |f|
-      f.params['query'] = image_description
+      f.params['query'] = image_location
       f.params['page'] = 1
       f.params['client_id'] = ENV['IMAGE_KEY']
     end
