@@ -19,7 +19,6 @@ RSpec.describe "Sessions Request Api" do
       headers = { "CONTENT_TYPE" => "application/json", "ACCEPT" => "application/json" }
       post "/api/v1/sessions", headers: headers, params: JSON.generate(user_login_params)
       user_response = JSON.parse(response.body, symbolize_names: true)
-
       expect(user_response).to have_key(:data)
       expect(user_response[:data]).to have_key(:type)
       expect(user_response[:data]).to have_key(:id)
@@ -33,6 +32,23 @@ RSpec.describe "Sessions Request Api" do
       expect(user_response[:data][:attributes][:email]).to eq(created_user.email)
       expect(user_response[:data][:type]).to eq('users')
       expect(response.status).to eq(200)
+    end
+  end
+  describe "sad path" do
+    it "can not log in an user if user does not exist in our db" do
+      user_login_params = {
+                      "email": "email@example.com",
+                      "password": "hello_world"
+                    }
+
+      headers = { "CONTENT_TYPE" => "application/json", "ACCEPT" => "application/json" }
+      post "/api/v1/sessions", headers: headers, params: JSON.generate(user_login_params)
+      user_response = JSON.parse(response.body, symbolize_names: true)
+
+      expect(response.status).to eq(400)
+      expect(user_response).to have_key(:error)
+      expect(user_response).to_not have_key(:data)
+      expect(user_response[:error]).to eq("invalid parameters")
     end
   end
 end
