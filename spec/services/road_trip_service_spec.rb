@@ -40,5 +40,28 @@ RSpec.describe RoadTripService do
         expect(trip_data[:route][:formattedTime]).to be_a String
       end
     end
+    describe "::trip sad path" do
+      it "can not get route data if the route is not possible", :vcr do
+        from_location = 'rockford,il'
+        to_location = 'london,uk'
+
+        trip_data = RoadTripService.trip(from_location, to_location)
+
+        expect(trip_data).to have_key(:route)
+        expect(trip_data).to have_key(:info)
+        expect(trip_data[:info]).to have_key(:messages)
+        expect(trip_data[:info][:messages][0]).to eq("We are unable to route with the given locations.")
+      end
+      it "can not get route data if location are empty", :vcr do
+        from_location = ''
+        to_location = ''
+
+        trip_data = RoadTripService.trip(from_location, to_location)
+        expect(trip_data).to have_key(:route)
+        expect(trip_data).to have_key(:info)
+        expect(trip_data[:info]).to have_key(:messages)
+        expect(trip_data[:info][:messages][0]).to eq("At least two locations must be provided.")
+      end
+    end
   end
 end
