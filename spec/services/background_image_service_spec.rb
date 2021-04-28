@@ -45,5 +45,21 @@ RSpec.describe BackgroundImageService do
         expect(image_data[:results].first[:urls][:thumb]).to be_a String
       end
     end
+    describe "::get_image/sad path" do
+      it "returns no results for random string", :vcr do
+        location = "adfajo23323"
+        image_data = BackgroundImageService.get_image(location)
+        expect(image_data[:total]).to eq(0)
+        expect(image_data[:total_pages]).to eq(0)
+        expect(image_data[:results]).to eq([])
+      end
+      it "returns no results for negative float", :vcr do
+        location = -34534.4
+        image_data = BackgroundImageService.get_image(location)
+        expect(image_data[:total]).to eq(0)
+        expect(image_data[:total_pages]).to eq(0)
+        expect(image_data[:results]).to eq([])
+      end
+    end
   end
 end
