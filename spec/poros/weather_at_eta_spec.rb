@@ -2,20 +2,10 @@ require 'rails_helper'
 
 RSpec.describe WeatherAtEta do
   it "exists" do
-    data = {:dt=>1619568000,
+    data = {
             :temp=>65.37,
-            :feels_like=>62.64,
-            :pressure=>1004,
-            :humidity=>22,
-            :dew_point=>26.33,
-            :uvi=>0.62,
-            :clouds=>11,
-            :visibility=>10000,
-            :wind_speed=>10.71,
-            :wind_deg=>276,
-            :wind_gust=>13.42,
-            :weather=>[{:id=>801, :main=>"Clouds", :description=>"hello world", :icon=>"02d"}],
-            :pop=>0.31}
+            :weather=>[{:id=>801, :main=>"Clouds", :description=>"hello world", :icon=>"02d"}]
+            }
 
     weather = WeatherAtEta.new(data)
     expect(weather).to be_a WeatherAtEta
